@@ -1,0 +1,74 @@
+REDUX REDUCERS:
+- playerReducer
+- dungeonReducer
+- gameStateReducer
+-------------------------------------------------------------------------------------------------------
+
+
+REDUX INITIAL STATES:
+- playerReducer
+  - allPlayers (object of objects representing each player with player names as keys)
+  - cardsOnStage (object of objects representing cards that have been played by users against the current enemy)
+
+- dungeonReducer
+  - dungeonDeck (stack of enemy objects representing number of enemies left to defeat)
+  - currentEnemy (current enemy object that players are fighting against)
+  - bossStatus (boolean for if boss is alive or not)
+
+- gameStateReducer
+  - numPlayersInGame (number of players in game)
+  - numDeadPlayers (number of players that have died during the game)
+  - gameStarted (boolean representing if game has started)
+  - gameFinished (boolean representing if game has finished)
+  - didWin (boolean representing if the players won or not; initially set to null)
+  - timerActive (boolean representing if in-game timer is still running)
+---------------------------------------------------------------------------------------------------------
+
+
+REDUX ACTIONS:
+- playerReducer
+  - addPlayer (adds new player object to allPlayers object)
+  - randomizePlayerDecks (randomly shuffle each player's deck)
+  - drawNewHand (all players draw new cards based on the number of people playing (i.e. 3, 4, or 5 cards))
+  - drawCard (player draws a card)
+  - useCard (player uses a card, then draws a new card to replace it)
+  - discardCard (player discards a card, then draws a new card to replace it)
+  - playerKilled (player ran out of cards so now the player is dead)
+  - suggestCard (highlight card click on by another player)
+
+- dungeonReducer
+  - randomizeDungeonDeck (randomly shuffle dungeon deck)
+  - setNewEnemy (draw from dungeon deck to set a new current enemy the players must defeat)
+  - compareCardAgainstEnemy (whenever someone uses a card, check if that card affects the current enemy; if it does, decrement corresponding color value and if all values === 0, remove current enemy)
+  - bossDead (set bossStatus to false (not alive) if a boss is a defeated)
+
+- gameStateReducer
+  - addPlayer (increments numPlayersInGame)
+  - playerKilled (increments numDeadPlayers)
+  - gameLost (sets didWin to false; happens when time runs out or if numDeadPlayers === numPlayersInGame)
+  - gameWon (sets didWin to true; happens when boss is killed)
+  - startGame (starts the game, initializing a variety of states as well as starts the timer)
+  - finishGame (ends the game when didWin is set to either true or false)
+-----------------------------------------------------------------------------------------------------------
+
+
+NESTED OBJECTS AND THEIR PROPERTIES
+- card
+  - cardType1 ('RED', 'BLUE', 'YELLOW', 'GREEN', 'PURPLE')
+  - cardType2 ('RED', 'BLUE', 'YELLOW', 'GREEN', 'PURPLE')
+  - highlighted (true or false)
+  - location ('DECK', 'HAND', 'DISCARD')
+
+- player
+  - drawPile (stack of cards available to draw from)
+  - currentHand (array of cards player currently has in hand)
+  - discardPile (stack of cards that have been discarded)
+  - alive (boolean representing whether player is alive or not)
+
+- enemy
+  - numRed (number of red cards needed to beat enemy)
+  - numBlue (number of blue cards needed to beat enemy)
+  - numYellow (number of yellow cards needed to beat enemy)
+  - numGreen (number of green cards needed to beat enemy)
+  - numPurple (number of purple cards needed to beat enemy)
+  - isBoss (boolean set to true if the enemy is a boss)
