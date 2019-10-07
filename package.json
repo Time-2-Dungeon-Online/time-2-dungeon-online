@@ -4,6 +4,7 @@
   "description": "Time2Dungeon Game",
   "main": "index.js",
   "dependencies": {
+    "express": "^4.17.1",
     "node": "^12.11.1",
     "react": "^16.10.2"
   },
