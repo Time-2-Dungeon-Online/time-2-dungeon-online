@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "node": "^12.11.1",
+    "path": "^0.12.7",
     "react": "^16.10.2"
   },
   "devDependencies": {},
