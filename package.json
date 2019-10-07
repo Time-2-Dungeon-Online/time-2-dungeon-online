@@ -1,0 +1,24 @@
+{
+  "name": "time-2-dungeon-online",
+  "version": "1.0.0",
+  "description": "Time2Dungeon Game",
+  "main": "index.js",
+  "dependencies": {
+    "node": "^12.11.1",
+    "react": "^16.10.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Time-2-Dungeon-Online/time-2-dungeon-online.git"
+  },
+  "author": "Team-Wow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Time-2-Dungeon-Online/time-2-dungeon-online/issues"
+  },
+  "homepage": "https://github.com/Time-2-Dungeon-Online/time-2-dungeon-online#readme"
+}
