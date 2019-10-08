@@ -1,56 +1,142 @@
 const request = require('supertest');
-// import app from '../app';
-const express = require('express');
-const app = express();
+import app from '../server';
 
-app.get('/', (req, res) => {
-  res.status(200).send('Homepage');
-});
-
-app.get('/signup', (req, res) => {
-  res.status(200).send('Signup')
-});
-
-app.get('/login', (req, res) => {
-  res.status(200).send('Log In')
-});
-
-app.post('/login', (req, res) => {
-
-});
-
-app.get('/session', (req, res) => {
-  res.status(200).send('Start Session')
-});
-
-describe('GET / - index.html endpoint', () => {
-  it('Displays homepage when / is requested', async() => {
-    const result = await request(app).get('/');
-    expect(result.statusCode).toEqual(200);
-    expect(result.text).toEqual('Homepage');
+describe('Route integration', () => {
+  let session = null;
+  describe('/', () => {
+    describe('GET', () => {
+      it('responds with 200 status code and text/HTML content', () => {
+        request(app)
+        .get('/')
+        .expect(200)
+        .expect('Content-Type', /text\/html/)
+        .end((err, res) => {
+          if (err) return done(err);
+          done();
+        });
+      });
+    });
   });
-});
 
-describe('GET / - returns sign up page', () => {
-  it('Displays the sign up page when /signup is requested', async() => {
-    const result = await request(app).get('/signup');
-    expect(result.statusCode).toEqual(200);
-    expect(result.text).toEqual('Signup');
+  describe('/signup', () => {
+    describe('GET', () => {
+      it('responds with 200 status code.', () => {
+        request(app)
+          .get('/signup')
+          .expect(200)
+          .end((err, res) => {
+            if (err) return done(err);
+            done();
+          });
+      });
+    });
+
+    describe('POST', () => {
+      it('responds with 200 status code and application/json content type', () => {
+        request(app)
+          .post('/signup')
+          .send({ username: 'Tester', password: 'helloworld'})
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((err, res) => {
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('return username with on response body', () => {
+          request(app)
+          .post('/signup')
+          .send({ username: 'Tester', password: 'helloworld'})
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .then((res) => {
+            assert(res.body.username, username)
+            done();
+          })
+          .catch(err => {
+            if (err) done(err);
+          })
+      });
+
+      it('set a session cookie when the user has completing the sign up process.', () => {
+        request(app)
+        .post('/signup')
+        .send({ username: 'Tester', password: 'helloworld'})
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .then((res) => {
+          session = res.header.cookie;
+          done();
+        })
+        .catch((err) => {
+          if (err) return done(err); 
+        })
+      })
+    });
   });
-});
 
-describe('GET / - returns login page', () => {
-  it('Displays the sign up page when /login is requested', async() => {
-    const result = await request(app).get('/login');
-    expect(result.statusCode).toEqual(200);
-    expect(result.text).toEqual('Log In');
-  });
-});
+  describe('/login', () => {
+    describe('GET', () => {
+      it('responds with 200 status code', () => {
+        request(app)
+        .get('/login')
+        .expect(200)
+        .end((err, res) => {
+          if (err) return done(err);
+          done();
+        });
+      });
+    });
 
-describe('GET / - returns start session page', () => {
-  it('Displays the sign up page when /session is requested', async() => {
-    const result = await request(app).get('/session');
-    expect(result.statusCode).toEqual(200);
-    expect(result.text).toEqual('Start Session');
+    describe('POST', () => {
+      it('responds with 200 status code and application/json content type', () => {
+        request(app)
+          .post('/login')
+          .send({ username: 'Tester', password: 'helloworld'})
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((err, res) => {
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('return username with on response body', () => {
+          request(app)
+          .post('/login')
+          .send({ username: 'Tester', password: 'helloworld'})
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .then((res) => {
+            assert(res.body.username, username)
+            done();
+          })
+          .catch(err => {
+            if (err) done(err);
+          });
+      });
+
+      it('set a session cookie when the user has completing the sign up process.', () => {
+        request(app)
+        .post('/login')
+        .send({ username: 'Tester', password: 'helloworld'})
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .then((res) => {
+          session = res.header.cookie;
+          done();
+        })
+        .catch((err) => {
+          if (err) return done(err); 
+        });
+      });
+    });
   });
 });
