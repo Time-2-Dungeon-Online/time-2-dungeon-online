@@ -45,8 +45,7 @@ REDUX ACTIONS:
 - gameStateReducer
   - addPlayer (increments numPlayersInGame)
   - playerKilled (increments numDeadPlayers)
-  - gameLost (sets didWin to false; happens when time runs out or if numDeadPlayers === numPlayersInGame)
-  - gameWon (sets didWin to true; happens when boss is killed)
+  - winOrLoss (sets didWin to true is won, false if lost)
   - startGame (starts the game, initializing a variety of states as well as starts the timer)
   - finishGame (ends the game when didWin is set to either true or false)
 -----------------------------------------------------------------------------------------------------------
@@ -72,4 +71,5 @@ NESTED OBJECTS AND THEIR PROPERTIES
   - numYellow (number of yellow cards needed to beat enemy)
   - numGreen (number of green cards needed to beat enemy)
   - numPurple (number of purple cards needed to beat enemy)
+  - location ('DECK', 'CURRENT_ENEMY', 'DEAD')
   - isBoss (boolean set to true if the enemy is a boss)

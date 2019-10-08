@@ -16,8 +16,6 @@ export const COMPARE_CARD_AGAINST_ENEMY = "COMPARE_CARD_AGAINST_ENEMY";
 export const BOSS_DEAD = "BOSS_DEAD";
 
 // GAME STATE REDUCER ACTION TYPES
-export const PLAYER_KILLED = "PLAYER_KILLED";
-export const GAME_LOST = "GAME_LOST";
-export const GAME_WON = "GAME_WON";
+export const WIN_OR_LOSS = "WIN_OR_LOSS";
 export const START_GAME = "START_GAME";
 export const FINISH_GAME = "FINISH_GAME";
