@@ -58,6 +58,7 @@ NESTED OBJECTS AND THEIR PROPERTIES
   - cardType2 ('RED', 'BLUE', 'YELLOW', 'GREEN', 'PURPLE')
   - highlighted (true or false)
   - location ('DECK', 'HAND', 'DISCARD')
+  - owner ('insert player name here')
 
 - player
   - drawPile (stack of cards available to draw from)
