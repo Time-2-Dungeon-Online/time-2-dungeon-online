@@ -1,17 +1,20 @@
 const path = require('path');
 
 module.exports = {
-    mode: development,
-    entry: './src/client/index.js',
+    mode: process.env.NODE_ENV,
+    entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: 'bundle.js'
     },
     devServer: {
-    publicPath: '/dist/',
-    proxy: {
-        '/api': 'http://localhost:3000'
-    }
+        publicPath: 'dist',
+        hot: true,
+        port: 8080,
+        proxy: {
+            '/': 'http://localhost:3000',
+        }
+        
     },
     module: {
     rules: [
@@ -26,7 +29,7 @@ module.exports = {
             }
         },
         {
-            test: /\.scss$/,
+            test: /\.css$/,
             exclude: /(node_modules)/,
                 use: [
                     // style-loader
@@ -34,9 +37,7 @@ module.exports = {
                     // css-loader
                     {
                         loader: 'css-loader',
-                    },
-                    // sass-loader
-                    { loader: 'sass-loader' }
+                    }
                 ]
         }
         ]
