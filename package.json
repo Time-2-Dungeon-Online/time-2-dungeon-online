@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --verbose"
   },
   "repository": {
     "type": "git",
@@ -19,10 +19,12 @@
     "url": "https://github.com/Time-2-Dungeon-Online/time-2-dungeon-online/issues"
   },
   "homepage": "https://github.com/Time-2-Dungeon-Online/time-2-dungeon-online#readme",
+  "jest": {
+    "globalSetup": "./jest-setup.js",
+    "globalTeardown": "./jest-teardown.js"
+  },
   "dependencies": {
-    "express": "^4.17.1",
     "jest": "^24.9.0",
-    "supertest": "^4.0.2",
-    "ts-jest": "^24.1.0"
+    "supertest": "^4.0.2"
   }
 }
