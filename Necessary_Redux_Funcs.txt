@@ -21,7 +21,6 @@ REDUX INITIAL STATES:
   - gameStarted (boolean representing if game has started)
   - gameFinished (boolean representing if game has finished)
   - didWin (boolean representing if the players won or not; initially set to null)
-  - timerActive (boolean representing if in-game timer is still running)
 ---------------------------------------------------------------------------------------------------------
 
 
@@ -47,7 +46,7 @@ REDUX ACTIONS:
   - playerKilled (increments numDeadPlayers)
   - winOrLoss (sets didWin to true is won, false if lost)
   - startGame (starts the game, initializing a variety of states as well as starts the timer)
-  - finishGame (ends the game when didWin is set to either true or false)
+  - finishGame (ends the game when time runs out, when all players are dead, or when the boss has been defeated)
 -----------------------------------------------------------------------------------------------------------
 
 
