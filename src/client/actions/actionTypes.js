@@ -6,7 +6,7 @@ export const DRAW_NEW_HAND = "DRAW_NEW_HAND";
 export const DRAW_CARD = "DRAW_CARD";
 export const USE_CARD = "USE_CARD";
 export const DISCARD_CARD = "DISCARD_CARD";
-export const PLAYER_KILLED = "PLAYER_KILLED";
+export const PLAYER_KILLED = "PLAYER_KILLED"; // Also used with Game State Reducer
 export const SUGGEST_CARD = "SUGGEST_CARD";
 
 // DUNGEON REDUCER ACTION TYPES
