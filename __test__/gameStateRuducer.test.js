@@ -1,6 +1,6 @@
 const subject = require('../src/client/');
 
-describe('Player Reducer', () => {
+describe('Game State Reducer', () => {
   let state;
 
   beforeEach(() => {
