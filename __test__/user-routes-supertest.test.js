@@ -1,5 +1,5 @@
 const request = require('supertest');
-const server = require('../server/server');
+const server = require('../server/server.js');
 
 describe('Route integration', () => {
   describe('/', () => {
