@@ -1,3 +1,3 @@
-module.exports = async (globalConfig) => {
-  await testServer.listen().close();
+module.exports = (globalConfig) => {
+  testServer.close();
 };
