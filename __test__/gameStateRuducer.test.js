@@ -10,7 +10,7 @@ describe('Player Reducer', () => {
       gameStarted: false,
       gameFinished: false,
       didWin: null,
-      timerActive: true
+      timerActive: null,
     }
   });
 
@@ -24,6 +24,39 @@ describe('Player Reducer', () => {
     test('should return the original without any duplication', () => {
       const action = {type: 'skjdwfeiwbfewnfofn'};
       expect(subject(state, action)).toEqual(state);
+    });
+  });
+
+  describe('START_GAME', () => {
+    const action = {
+      type: 'START_GAME'
+    }
+
+    test('should set gameStarted to TRUE if the number of players in the game is greater than or equal to TWO', () => {
+      state.playersInGame = 2;
+      const { gameStarted } = subject(state, action);
+      expect(gameStarted).toEqual(true);
+    });
+
+    test('should set timerActive to TRUE when game starts', () => {
+      state.playersInGame = 2;
+      const { timerActive } = subject(state, action);
+      expect(timerActive).toEqual(true);
+    });
+
+    test('should return the original without any duplication if the number of players is below TWO', () => {
+      expect(subject(state, action)).toEqual(state);
+    });
+
+    test('returns a state object not strictly equal to the original', () => {
+      expect(subject(state, action)).not.toBe({
+        playersInGame: 0,
+        deadPlayers: 0,
+        gameStarted: false,
+        gameFinished: false,
+        didWin: null,
+        timerActive: null,
+      });
     });
   });
   
@@ -56,7 +89,7 @@ describe('Player Reducer', () => {
         gameStarted: false,
         gameFinished: false,
         didWin: null,
-        timerActive: true
+        timerActive: null,
       });
     });
   });
@@ -91,7 +124,7 @@ describe('Player Reducer', () => {
         gameStarted: false,
         gameFinished: false,
         didWin: null,
-        timerActive: true
+        timerActive: null,
       });
     });
   });
@@ -121,7 +154,7 @@ describe('Player Reducer', () => {
         gameStarted: false,
         gameFinished: false,
         didWin: null,
-        timerActive: true
+        timerActive: null,
       });
     });
   });
@@ -133,7 +166,7 @@ describe('Player Reducer', () => {
 
     test('should set didWin to true when the dungeon boss is defeated', () => {
       const { didWin } = subject(state, action);
-      expect(dudWin).toEqual(true);
+      expect(didWin).toEqual(true);
     });
 
     test('returns a state object not strictly equal to the original', () => {
@@ -143,12 +176,37 @@ describe('Player Reducer', () => {
         gameStarted: false,
         gameFinished: false,
         didWin: null,
-        timerActive: true
+        timerActive: null,
+      });
+    });
+  });
+
+  describe('FINISH_GAME', () => {
+    const action = {
+      type: 'FINISH_GAME'
+    }
+
+    test('should set gameFinished to TRUE when didWin is FALSE', () => {
+      state.didWin = false;
+      const { gameFinished } = subject(state, action);
+      expect(gameFinished).toEqual(true);
+    });
+
+    test('should set gameFinished to TRUE when didWin is TRUE', () => {
+      state.didWin = true;
+      const { gameFinished } = subject(state, action);
+      expect(gameFinished).toEqual(true);
+    });
+
+    test('returns a state object not strictly equal to the original', () => {
+      expect(subject(state, action)).not.toBe({
+        playersInGame: 0,
+        deadPlayers: 0,
+        gameStarted: false,
+        gameFinished: false,
+        didWin: null,
+        timerActive: null,
       });
     });
   });
 });
-
-- gameStateReducer
-  - startGame (starts the game, initializing a variety of states as well as starts the timer)
-  - finishGame (ends the game when didWin is set to either true or false)
