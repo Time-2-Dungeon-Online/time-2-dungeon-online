@@ -9,7 +9,7 @@ const initalState = {
   didWin: null,
 }
 
-const gameStateReducer = () => {
+const gameStateReducer = (state=initalState, action) => {
 
 };
 

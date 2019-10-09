@@ -7,7 +7,7 @@ const initialState = {
   bossStatus: true,
 }
 
-const dungeonReducer = () => {
+const dungeonReducer = (state=initialState, action) => {
 
 }
 
