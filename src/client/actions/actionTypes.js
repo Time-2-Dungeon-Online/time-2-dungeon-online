@@ -1,0 +1,21 @@
+
+// PLAYER REDUCER ACTION TYPES
+export const ADD_PLAYER = "ADD_PLAYER"; // Also used with Game State Reducer
+export const RANDOMIZE_PLAYER_DECKS = "RANDOMIZE_PLAYER_DECKS";
+export const DRAW_NEW_HAND = "DRAW_NEW_HAND";
+export const DRAW_CARD = "DRAW_CARD";
+export const USE_CARD = "USE_CARD";
+export const DISCARD_CARD = "DISCARD_CARD";
+export const PLAYER_KILLED = "PLAYER_KILLED"; // Also used with Game State Reducer
+export const SUGGEST_CARD = "SUGGEST_CARD";
+
+// DUNGEON REDUCER ACTION TYPES
+export const RANDOMIZE_DUNGEON_DECK = "RANDOMIZE_DUNGEON_DECK";
+export const SET_NEW_ENEMY = "SET_NEW_ENEMY";
+export const COMPARE_CARD_AGAINST_ENEMY = "COMPARE_CARD_AGAINST_ENEMY";
+export const BOSS_DEAD = "BOSS_DEAD";
+
+// GAME STATE REDUCER ACTION TYPES
+export const WIN_OR_LOSS = "WIN_OR_LOSS";
+export const START_GAME = "START_GAME";
+export const FINISH_GAME = "FINISH_GAME";
