@@ -10,7 +10,7 @@ describe('Player Reducer', () => {
       gameStarted: false,
       gameFinished: false,
       didWin: null,
-      timerActive: false
+      timerActive: true
     }
   });
 
@@ -31,7 +31,7 @@ describe('Player Reducer', () => {
     const action = {
       type: 'ADD_PLAYER',
       payload: {
-        username: 'TESTER'
+        username: ['TESTER']
       }
     };
 
@@ -56,7 +56,7 @@ describe('Player Reducer', () => {
         gameStarted: false,
         gameFinished: false,
         didWin: null,
-        timerActive: false
+        timerActive: true
       });
     });
   });
@@ -65,7 +65,7 @@ describe('Player Reducer', () => {
     const action = {
       type: 'PLAYER_KILLED',
       payload: {
-        username: 'TESTER'
+        username: ['TESTER']
       }
     };
 
@@ -91,7 +91,7 @@ describe('Player Reducer', () => {
         gameStarted: false,
         gameFinished: false,
         didWin: null,
-        timerActive: false
+        timerActive: true
       });
     });
   });
@@ -99,16 +99,56 @@ describe('Player Reducer', () => {
   describe('GAME_LOST', () => {
     const action = {
       type: 'GAME_LOST',
-      payload: false
     };
 
-    test('should set didWin to false')
+    test('should set didWin to false if the number of players in game equals the number of dead players', () => {
+      state.playersInGame += 2;
+      state.deadPlayers +=2;
+      const { didWin } = subject(state, action);
+      expect(didWin).toEqual(false);
+    });
+
+    test('should set didWin to false if the timer is set to false', () => {
+      state.timerActive = false;
+      const { didWin } = subject(state, action);
+      expect(didWin).toEqual(false);
+    });
+
+    test('returns a state object not strictly equal to the original', () => {
+      expect(subject(state, action)).not.toBe({
+        playersInGame: 0,
+        deadPlayers: 0,
+        gameStarted: false,
+        gameFinished: false,
+        didWin: null,
+        timerActive: true
+      });
+    });
   });
   
+  describe('GAME_WON', () => {
+    const action = {
+      action: 'GAME_WON',
+    };
+
+    test('should set didWin to true when the dungeon boss is defeated', () => {
+      const { didWin } = subject(state, action);
+      expect(dudWin).toEqual(true);
+    });
+
+    test('returns a state object not strictly equal to the original', () => {
+      expect(subject(state, action)).not.toBe({
+        playersInGame: 0,
+        deadPlayers: 0,
+        gameStarted: false,
+        gameFinished: false,
+        didWin: null,
+        timerActive: true
+      });
+    });
+  });
 });
 
 - gameStateReducer
-  - gameLost (sets didWin to false; happens when time runs out or if numDeadPlayers === numPlayersInGame)
-  - gameWon (sets didWin to true; happens when boss is killed)
   - startGame (starts the game, initializing a variety of states as well as starts the timer)
   - finishGame (ends the game when didWin is set to either true or false)
