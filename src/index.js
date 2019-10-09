@@ -1,2 +1,5 @@
+import { render } from 'react-dom';
+import React from 'react';
+import App from './client/App.jsx';
 
-console.log('hello')
+render(<App />, document.getElementById('root'));

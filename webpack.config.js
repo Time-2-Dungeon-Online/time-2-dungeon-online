@@ -4,17 +4,15 @@ module.exports = {
     mode: process.env.NODE_ENV,
     entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.join(__dirname, "dist"),
         filename: 'bundle.js'
     },
     devServer: {
-        publicPath: 'dist',
-        hot: true,
+        publicPath: '/dist/',
         port: 8080,
         proxy: {
-            '/': 'http://localhost:3000',
+            '/api': 'http://localhost:3000',
         }
-        
     },
     module: {
     rules: [
