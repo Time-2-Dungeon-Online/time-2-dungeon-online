@@ -4,7 +4,7 @@
   "description": "Time2Dungeon Game",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose",
     "start": "NODE_ENV=production node server/server.js",
     "dev": "NODE_ENV=development webpack-dev-server --open & nodemon server/server.js",
     "test-server": "NODE_ENV=development webpack-dev-server",
@@ -28,6 +28,7 @@
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "express": "^4.17.1",
@@ -39,14 +40,16 @@
     "react-redux": "^7.1.1",
     "redux": "^4.0.4",
     "style-loader": "^1.0.0",
-    "webpack-cli": "^3.3.9",
     "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2"
   },
   "devDependencies": {
-    "nodemon": "^1.19.3",
-    "webpack-cli": "^3.3.9",
+    "@babel/plugin-transform-async-to-generator": "^7.5.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "jest": "^24.9.0",
-    "supertest": "^4.0.2"
+    "nodemon": "^1.19.3",
+    "supertest": "^4.0.2",
+    "webpack-cli": "^3.3.9"
   }
 }
