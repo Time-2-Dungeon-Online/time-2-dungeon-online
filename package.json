@@ -47,5 +47,6 @@
   "devDependencies": {
     "nodemon": "^1.19.3",
     "webpack-cli": "^3.3.9"
+    "supertest": "^4.0.2"
   }
 }
