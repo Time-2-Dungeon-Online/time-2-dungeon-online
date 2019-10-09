@@ -38,11 +38,11 @@ describe('Game State Reducer', () => {
       expect(gameStarted).toEqual(true);
     });
 
-    test('should set timerActive to TRUE when game starts', () => {
-      state.playersInGame = 2;
-      const { timerActive } = subject(state, action);
-      expect(timerActive).toEqual(true);
-    });
+    // test('should set timerActive to TRUE when game starts', () => {
+    //   state.playersInGame = 2;
+    //   const { timerActive } = subject(state, action);
+    //   expect(timerActive).toEqual(true);
+    // });
 
     test('should return the original without any duplication if the number of players is below TWO', () => {
       expect(subject(state, action)).toEqual(state);
@@ -141,11 +141,11 @@ describe('Game State Reducer', () => {
       expect(didWin).toEqual(false);
     });
 
-    test('should set didWin to false if the timer is set to false', () => {
-      state.timerActive = false;
-      const { didWin } = subject(state, action);
-      expect(didWin).toEqual(false);
-    });
+    // test('should set didWin to false if the timer is set to false', () => {
+    //   state.timerActive = false;
+    //   const { didWin } = subject(state, action);
+    //   expect(didWin).toEqual(false);
+    // });
 
     test('returns a state object not strictly equal to the original', () => {
       expect(subject(state, action)).not.toBe({
