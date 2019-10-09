@@ -8,18 +8,16 @@ module.exports = {
         filename: 'bundle.js'
     },
     devServer: {
-        publicPath: 'dist',
-        hot: true,
+        publicPath: '/dist/',
         port: 8080,
         proxy: {
-            '/': 'http://localhost:3000',
+            '/api': 'http://localhost:3000',
         }
-        
     },
     module: {
     rules: [
         {
-            test: /\.jsx?/,
+            test: /\.js?/,
             exclude: /(node_modules)/,
             use: {
                 loader: 'babel-loader',

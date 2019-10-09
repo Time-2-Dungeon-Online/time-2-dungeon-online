@@ -18,7 +18,8 @@
     "redux": "^4.0.4",
     "style-loader": "^1.0.0",
     "webpack": "^4.41.0",
-    "webpack-dev-server": "^3.8.2"
+    "webpack-dev-server": "^3.8.2",
+    "ws": "^7.1.2"
   },
   "devDependencies": {
     "nodemon": "^1.19.3",
@@ -28,7 +29,7 @@
     "test": "jest",
     "start": "node server/server.js",
     "dev": "NODE_ENV=development webpack-dev-server --open & nodemon server/server.js",
-    "test-server": "NODE_ENV=development webpack-dev-server",
+    "test-server": "NODE_ENV=development webpack-dev-server --open",
     "build": "NODE_ENV=production; webpack"
   },
   "repository": {
