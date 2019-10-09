@@ -69,19 +69,19 @@ describe('Player Reducer', () => {
       }
     };
 
-    describe('should decrement the player count by one', () => {
-      state.playersInGame += 1;
-      const { playersInGame } = subject(state, action);
-      expect(playersInGame).toEqual(0);
+    describe('should increment the dead player count by one', () => {
+      const { deadPlayers } = subject(state, action);
+      expect(deadPlayers).toEqual(1);
     });
 
-    describe('should not allow the total number of players in the game to fall below 0', () => {
-      let deadPlayers;
-      for (let i = 1; i = -1; i-= 1) {
-        const { playersInGame } = subject(state, action);
-        deadPlayers = playersInGame;
+    describe('should not allow the total number of dead players in the game to exceed the total number of players in the game', () => {
+      let dead;
+      state.playersInGame += 1;
+      for (let i = 1; i <= 2; i+= 1) {
+        const { deadPlayers } = subject(state, action);
+        dead = deadPlayers;
       }
-      expect(deadPlayers).toEqual(0);
+      expect(dead).toEqual(1);
     });
 
     test('returns a state object not strictly equal to the original', () => {
@@ -94,7 +94,16 @@ describe('Player Reducer', () => {
         timerActive: false
       });
     });
-  })
+  });
+
+  describe('GAME_LOST', () => {
+    const action = {
+      type: 'GAME_LOST',
+      payload: false
+    };
+
+    test('should set didWin to false')
+  });
   
 });
 
