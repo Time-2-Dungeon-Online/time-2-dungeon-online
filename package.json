@@ -21,6 +21,8 @@
     "webpack-dev-server": "^3.8.2"
   },
   "devDependencies": {
+    "enzyme": "^3.10.0",
+    "jest": "^24.9.0",
     "nodemon": "^1.19.3",
     "webpack-cli": "^3.3.9"
   },
