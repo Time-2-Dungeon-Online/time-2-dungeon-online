@@ -63,9 +63,7 @@ describe('Game State Reducer', () => {
   describe('ADD_PLAYER', () => {
     const action = {
       type: 'ADD_PLAYER',
-      payload: {
-        username: ['TESTER']
-      }
+      payload: 'TESTER'
     };
 
     describe('should increment the player count by one', () => {
@@ -97,10 +95,8 @@ describe('Game State Reducer', () => {
   describe('PLAYER_KILLED', () => {
     const action = {
       type: 'PLAYER_KILLED',
-      payload: {
-        username: ['TESTER']
-      }
-    };
+      payload: 'TESTER'
+      };
 
     describe('should increment the dead player count by one', () => {
       const { deadPlayers } = subject(state, action);
