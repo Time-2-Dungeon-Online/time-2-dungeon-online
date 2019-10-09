@@ -9,9 +9,8 @@ app.use(express.json());
 
 //only serve static files if we are in production
 if(process.env.NODE_ENV === 'production') {
-  console.log('we are in production');
   app.use('/', express.static(path.resolve(__dirname, '../')));
-  //serve things inside of the build file
+  //serve bundle from the dist folder
   app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
 };
 
