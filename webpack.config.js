@@ -22,7 +22,8 @@ module.exports = {
             use: {
                 loader: 'babel-loader',
                 options: {
-                    presets: ['@babel/preset-env','@babel/preset-react']
+                    presets: ['@babel/preset-env','@babel/preset-react', 'babel-jest'],
+                    plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-transform-runtime']
                 }
             }
         },
