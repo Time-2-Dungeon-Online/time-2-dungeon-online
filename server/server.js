@@ -21,3 +21,5 @@ app.use('*', (err, req, res) => {
 });
 
 app.listen(3000, () => console.log('listening on PORT: ' + PORT));
+
+module.exports = app;
