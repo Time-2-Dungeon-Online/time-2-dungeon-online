@@ -36,8 +36,9 @@ module.exports = (port) => {
           break;
 
         case type.CLIENT_TO_SERVER_USE_CARD:
-          const { username, card } = msg.payload;
-          // where the game logic happens
+          const { card } = msg.payload;
+          // where the card gets processed by the game logic
+
         default:
           break;
       }
