@@ -15,30 +15,21 @@ module.exports = {
         }
     },
     module: {
-    rules: [
-        {
-            test: /\.jsx?/,
-            exclude: /(node_modules)/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env','@babel/preset-react', 'babel-jest'],
-                    plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-transform-runtime']
-                }
-            }
-        },
-        {
-            test: /\.css$/,
-            exclude: /(node_modules)/,
-                use: [
-                    // style-loader
-                    { loader: 'style-loader' },
-                    // css-loader
-                    {
-                        loader: 'css-loader',
-                    }
-                ]
-        }
-        ]
-    }
+        rules: [
+            {
+            test: /jsx?$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            query: {
+                presets: ['@babel/env', '@babel/react'],
+                plugins: ['@babel/plugin-transform-runtime', '@babel/transform-async-to-generator'],
+            },
+            },
+            {
+            test: /scss$/,
+            exclude: /node_modules/,
+            loaders: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+        ],
+    },
 };
