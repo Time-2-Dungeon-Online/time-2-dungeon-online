@@ -6,7 +6,7 @@ const { makeShuffledDeck } = require('./game_algos');
 // Player Representation
 function Player(playerName) {
   this.playerName = playerName;
-  this.drawPile = new PlayerDeck(playerName);
+  this.drawPile = makeShuffledDeck(playerName);
   this.currentHand = {};
   this.discardPile = [];
   this.alive = true;
@@ -14,18 +14,18 @@ function Player(playerName) {
 
 // Card Representation
 function Card(playerName, type) {
-  this.cardType1 = type;
+  this.cardType = type;
   this.highlighted = false;
   this.location = 'PLAYER_DECK';
   this.owner = playerName;
 }
 
 // PlayerDeck Representation
-function PlayerDeck(playerName) {
-  this.numCardsInDeck = 40;
-  this.owner = playerName;
-  this.deck = makeShuffledDeck(playerName);
-}
+// function PlayerDeck(playerName) {
+//   this.numCardsInDeck = 40;
+//   this.owner = playerName;
+//   this.deck = makeShuffledDeck(playerName);
+// }
 
 // Enemy Representation
 function Enemy(bossBool=false, howToKillObj) {
