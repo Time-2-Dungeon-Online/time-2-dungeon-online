@@ -1,4 +1,4 @@
-const subject = require('../src/client/');
+import subject from '../src/client/reducers/gameStateReducer';
 
 describe('Game State Reducer', () => {
   let state;
@@ -38,11 +38,11 @@ describe('Game State Reducer', () => {
       expect(gameStarted).toEqual(true);
     });
 
-    // test('should set timerActive to TRUE when game starts', () => {
-    //   state.playersInGame = 2;
-    //   const { timerActive } = subject(state, action);
-    //   expect(timerActive).toEqual(true);
-    // });
+    test('should set timerActive to TRUE when game starts', () => {
+      state.playersInGame = 2;
+      const { timerActive } = subject(state, action);
+      expect(timerActive).toEqual(true);
+    });
 
     test('should return the original without any duplication if the number of players is below TWO', () => {
       expect(subject(state, action)).toEqual(state);
@@ -66,12 +66,12 @@ describe('Game State Reducer', () => {
       payload: 'TESTER'
     };
 
-    describe('should increment the player count by one', () => {
+    test('should increment the player count by one', () => {
       const { playersInGame } = subject(state, action);
       expect(playersInGame).toEqual(1);
     });
 
-    describe('should not allow the total number of players in the game to exceed 5', () => {
+    test('should not allow the total number of players in the game to exceed 5', () => {
       let totalPlayers;
       for (let i = 1; i <= 6; i+= 1) {
         const { playersInGame } = subject(state, action);
@@ -98,12 +98,12 @@ describe('Game State Reducer', () => {
       payload: 'TESTER'
     };
 
-    describe('should increment the dead player count by one', () => {
+    test('should increment the dead player count by one', () => {
       const { deadPlayers } = subject(state, action);
       expect(deadPlayers).toEqual(1);
     });
 
-    describe('should not allow the total number of dead players in the game to exceed the total number of players in the game', () => {
+    test('should not allow the total number of dead players in the game to exceed the total number of players in the game', () => {
       let dead;
       state.playersInGame += 1;
       for (let i = 1; i <= 2; i+= 1) {
@@ -137,11 +137,11 @@ describe('Game State Reducer', () => {
       expect(didWin).toEqual(false);
     });
 
-    // test('should set didWin to false if the timer is set to false', () => {
-    //   state.timerActive = false;
-    //   const { didWin } = subject(state, action);
-    //   expect(didWin).toEqual(false);
-    // });
+    test('should set didWin to false if the timer is set to false', () => {
+      state.timerActive = false;
+      const { didWin } = subject(state, action);
+      expect(didWin).toEqual(false);
+    });
 
     test('returns a state object not strictly equal to the original', () => {
       expect(subject(state, action)).not.toBe({

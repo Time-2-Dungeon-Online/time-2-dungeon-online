@@ -1,12 +1,4 @@
-const subject = require('../src/client/');
-
-- card
-  - cardType1 ('RED', 'BLUE', 'YELLOW', 'GREEN', 'PURPLE')
-  - highlighted (true or false)
-  - location ('DECK', 'HAND', 'DISCARD')
-
-
-
+import subject from '../src/client/reducers/playerReducer';
 
 describe('Player State Reducer', () => {
   let state;
@@ -34,13 +26,13 @@ describe('Player State Reducer', () => {
   })
 
   describe('Default State', () => {
-    test('should return a default state when given an undefined input', () => {
+    test.skip('should return a default state when given an undefined input', () => {
       expect(subject(undefined, {type: undefined})).toEqual(state);
     });
   });
 
   describe('Unrecognized Action Type', () => {
-    test('should return the original without any duplication', () => {
+    test.skip('should return the original without any duplication', () => {
       const action = {type: 'skjdwfeiwbfewnfofn'};
       expect(subject(state, action)).toEqual(state);
     });
@@ -52,8 +44,9 @@ describe('Player State Reducer', () => {
       payload: 'TESTER'
     };
 
-    test('should add player object to allPlayers', () => {
-
+    test.skip('should add player object to allPlayers', () => {
+      const { allPlayers } = subject(state, action);
+       
     });
   });
 });
