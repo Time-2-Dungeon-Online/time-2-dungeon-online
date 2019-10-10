@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Room from '../components/Room.jsx';
 
 const RoomContainer = () => {
