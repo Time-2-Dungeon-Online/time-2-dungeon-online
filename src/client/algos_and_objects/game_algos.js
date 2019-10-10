@@ -62,7 +62,7 @@ const makeShuffledDeck = (playerName, diffSeed=null) => {
   while (keys.length) {
     let rand = randGen(seed(), seed(), seed(), seed());
     let idx = rand() % keys.length;
-    deck.push(new Card(playerName, keys[idx]));
+    deck.push(new Card(playerName, keys[idx], deck.length));
     numCardTypes[keys[idx]]--;
     if (!numCardTypes[keys[idx]]) {
       delete numCardTypes[keys[idx]];
@@ -73,21 +73,54 @@ const makeShuffledDeck = (playerName, diffSeed=null) => {
   return deck;
 }
 
-const drawCardFromDeck = (player, deck) => {
-  
-}
 
 // Helper function that generates a new enemy or boss
 const generateRandomEnemy = (isBoss) => {
+  const types = [
+    'RED', 'BLUE', 'YELLOW', 'GREEN', 'PURPLE',
+  ]
+
+  const defeatConditions = {};
+  
 
 }
+
+// Helper function that compares the cards used by the players against the current enemy
+// Returns boolean checking if eneym is dead after cards have been thrown
+const isEnemyDead = (cardsOnStage, enemy) => {
+  const values = {
+    'RED': 1,
+    'REDx2': 2,
+    'BLUE': 1,
+    'BLUEx2': 2,
+    'YELLOW': 1,
+    'YELLOWx2': 2,
+    'GREEN': 1,
+    'GREENx2': 2,
+    'PURPLE': 1,
+    'PURPLEx2': 2,
+    'INSTAKILL': 999,
+  }
+  const defeatConditions = enemy.defeatConditions;
+  cardsOnStage.forEach((card) => {
+    let noX2;
+    if (card.cardType.slice(-2) === 'x2') {
+      noX2 = card.cardType.slice(0, card.cardType.length - 2);
+    }
+    if (defeatConditions.hasOwnProperty(noX2 || card.cardType)) {
+      defeatConditions[noX2 || card.cardType] -= values[card.cardType];
+    }
+  });
+
+  for (let condition in Object.keys(defeatConditions)) {
+    if (defeatConditions[condition] > 0) return false;
+  }
+  return true;
+};
 
 // Function that makes a shuffled dungeon of size numCards
 const makeSuffledDungeon = (numCards, diffSeed=null) => {
   const deck = [];
-  const types = [
-    'RED', 'BLUE', 'YELLOW', 'GREEN', 'PURPLE',
-  ]
 
   if (diffSeed) {
     let seed = seedGen(diffSeed);

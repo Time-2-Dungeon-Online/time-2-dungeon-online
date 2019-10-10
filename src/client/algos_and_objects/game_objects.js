@@ -13,7 +13,8 @@ function Player(playerName) {
 }
 
 // Card Representation
-function Card(playerName, type) {
+function Card(playerName, type, id) {
+  this.id = id;
   this.cardType = type;
   this.highlighted = false;
   this.location = 'PLAYER_DECK';
@@ -28,7 +29,7 @@ function Card(playerName, type) {
 // }
 
 // Enemy Representation
-function Enemy(bossBool=false, howToKillObj) {
+function Enemy(howToKillObj, bossBool) {
   // this.numRed = 0;
   // this.numBlue = 0;
   // this.numYellow = 0;
@@ -36,7 +37,7 @@ function Enemy(bossBool=false, howToKillObj) {
   // this.numPurple = 0;
   this.defeatConditions = howToKillObj;
   this.location = 'DUNGEON_DECK';
-  this.isBoss = bossBool;
+  this.isBoss = bossBool || false;
 }
 
 
