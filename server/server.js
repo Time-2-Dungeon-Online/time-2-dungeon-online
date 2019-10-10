@@ -1,11 +1,18 @@
 const express = require('express');
+
 const app = express();
+
+const socket = require('./utils/socket');
 const db = require('./model/SQLConnection')
 const path = require('path');
 
 const PORT = 3000;
 
 app.use(express.json());
+
+// Establish the WebSocket server
+socket(8000);
+// console.log(socket);
 
 //only serve static files if we are in production
 if(process.env.NODE_ENV === 'production') {
