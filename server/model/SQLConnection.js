@@ -3,16 +3,16 @@ const connectionString = 'postgres://cfdsuazz:SBC30hnVkuXekdHAnJ1pI2jCy3UG2OEg@s
 
 
 const pool = new Pool({
-    connectionString: connectionString
-  });
-
-pool.query('SELECT NOW()', (err, res) => {
-    if (err) console.log('There was an error connecting to the DB error:', err);
-    else{
-        console.log("SQL Connected");
-    }
-    pool.end();
+  connectionString: connectionString
 });
+
+// pool.query('SELECT NOW()', (err, res) => {
+//     if (err) console.log('There was an error connecting to the DB error:', err);
+//     else{
+//         console.log("SQL Connected");
+//     }
+//     pool.end();
+// });
 
 module.exports = pool;
 
