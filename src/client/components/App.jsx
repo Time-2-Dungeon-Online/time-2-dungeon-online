@@ -1,7 +1,7 @@
 
 import { Provider } from 'react-redux';
 // import { Component } from 'react';
-import store from './store';
+import store from '../store';
 import React, { useState } from 'react';
 
 const App = (props) => {
