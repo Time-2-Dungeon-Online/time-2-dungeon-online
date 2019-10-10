@@ -1,3 +1,3 @@
-module.exports = () => {
-  global.testServer = require('./server/server');
+module.exports = async () => {
+  global.testServer = await require('./server/server');
 };
