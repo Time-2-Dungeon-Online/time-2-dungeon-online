@@ -16,6 +16,7 @@ const playerReducer = (state=initialState, action) => {
     case types.ADD_PLAYER:
       allPlayers = {...(state.allPlayers)};
       allPlayers[action.payload] = new Player(action.payload);
+
       return {
         ...state,
         allPlayers,
@@ -26,6 +27,7 @@ const playerReducer = (state=initialState, action) => {
       Object.keys(allPlayers).forEach((player) => {
         allPlayers[player].drawPile = makeShuffledDeck(player);
       });
+
       return {
         ...state,
         allPlayers,
@@ -38,6 +40,7 @@ const playerReducer = (state=initialState, action) => {
         Object.keys(allPlayers).forEach((player) => {
           for (let i = 0; i < 5; i++) {
             allPlayers[player].currentHand[i] = allPlayers[player].drawPile.pop();
+            allPlayers[player].currentHand[i].location = 'HAND';
           }
         });
       }
@@ -45,6 +48,7 @@ const playerReducer = (state=initialState, action) => {
         Object.keys(allPlayers).forEach((player) => {
           for (let i = 0; i < 4; i++) {
             allPlayers[player].currentHand[i] = allPlayers[player].drawPile.pop();
+            allPlayers[player].currentHand[i].location = 'HAND';
           }
         });
       }
@@ -52,9 +56,11 @@ const playerReducer = (state=initialState, action) => {
         Object.keys(allPlayers).forEach((player) => {
           for (let i = 0; i < 3; i++) {
             allPlayers[player].currentHand[i] = allPlayers[player].drawPile.pop();
+            allPlayers[player].currentHand[i].location = 'HAND';
           }
         });
       }
+
       return {
         ...state,
         allPlayers,
@@ -62,7 +68,10 @@ const playerReducer = (state=initialState, action) => {
 
     case types.DRAW_CARD:
       allPlayers = {...(state.allPlayers)};
-      allPlayers[action.payload].currentHand.push(allPlayers[player].drawPile.pop());
+      const cardFromDeck = allPlayers[action.payload].drawPile.pop();
+      cardFromDeck.location = 'HAND';
+      allPlayers[action.payload].currentHand[cardFromDeck.id] = cardFromDeck;
+
       return {
         ...state,
         allPlayers,
@@ -70,14 +79,46 @@ const playerReducer = (state=initialState, action) => {
 
     case types.USE_CARD:
       allPlayers = {...(state.allPlayers)};
-      cardsOnStage = {...(state.cardsOnStage)};
-      cardsOnStage.push(allPlayers[action.payload.owner].currentHand)
+      cardsOnStage = [...(state.cardsOnStage)];
+
+      cardsOnStage.push(action.payload);
+      const cardFromHand = allPlayers[action.payload.owner].currentHand[action.payload.id].pop();
+      cardFromHand.location = 'DISCARD';
+      allPlayers[action.payload.owner].discardPile.push(cardFromHand);
+      
+      return {
+        allPlayers,
+        cardsOnStage,
+      };
 
     case types.DISCARD_CARD:
+      allPlayers = {...(state.allPlayers)};
+      const cardFromHand = allPlayers[action.payload.owner].currentHand[action.payload.id].pop();
+      cardFromHand.location = "DISCARD";
+      allPlayers[action.payload.owner].discardPile.push(cardFromHand);
+
+      return {
+        ...state,
+        allPlayers,
+      }
 
     case types.PLAYER_KILLED:
+      allPlayers = {...(state.allPlayers)};
+      allPlayers[action.payload].alive = false;
+
+      return {
+        ...state,
+        allPlayers,
+      }
 
     case types.SUGGEST_CARD:
+      allPlayers = {...(state.allPlayers)};
+      allPlayers[action.payload.owner].currentHand[action.payload.id].highlighted = true;
+
+      return {
+        ...state,
+        allPlayers,
+      }
 
     default:
       return {
