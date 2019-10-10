@@ -73,6 +73,10 @@ const makeShuffledDeck = (playerName, diffSeed=null) => {
   return deck;
 }
 
+const drawCardFromDeck = (player, deck) => {
+  
+}
+
 // Helper function that generates a new enemy or boss
 const generateRandomEnemy = (isBoss) => {
 
