@@ -3,8 +3,7 @@ import React from 'react';
 const Player = (props) => {
   return (
     <div id="player">
-      {props.name}
-      Player 1
+      Player {props.id}
       HP: 40/40
     </div>
   )

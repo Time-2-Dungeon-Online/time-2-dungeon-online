@@ -1,11 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import RoomContainer from './RoomContainer.jsx';
 import NavContainer from './NavContainer.jsx';
 import GameContainer from './GameContainer.jsx';
-import { useSelector } from 'react-redux';
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 const MainContainer = () => {
+  const gameisFull = useSelector(state => state.PlayerReducer.gameisFull);
+  console.log(gameisFull);
   return (
     <div id="main-container">
         <NavContainer />
@@ -13,7 +15,7 @@ const MainContainer = () => {
           <RoomContainer />
         </Route>
         <Route path="/main/game">
-          <GameContainer />
+          {gameisFull ? <p>Game is full</p> : <GameContainer />}
         </Route>
     </div>
   )

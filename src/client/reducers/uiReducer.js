@@ -3,6 +3,7 @@ import * as socketTypes from '../../../server/utils/actions';
 
 const wsServer = new WebSocket('ws://localhost:8000');
 const initialState = {
+  userID: Math.ceil(Math.random()*90),
   isSignedIn: false,
   wsServer,
 }
@@ -16,6 +17,7 @@ const uiReducer = (state = initialState, action) => {
     case types.JOIN_ROOM:
         state.wsServer.send(JSON.stringify({
           action: socketTypes.CLIENT_TO_SERVER_JOIN_GAME,
+          payload: state.userID,
         }));
       return state;
     default:
