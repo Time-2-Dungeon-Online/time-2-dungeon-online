@@ -46,15 +46,18 @@ module.exports = (port) => {
           // }));
           break;
           
-        case type.CLIENT_TO_SERVER_START_GAME:
-          ws.send(JSON.stringify({
-            action: type.SERVER_TO_CLIENT_START_GAME,
-          }));
-          break;
+        // case type.CLIENT_TO_SERVER_START_GAME:
+        //   ws.send(JSON.stringify({
+        //     action: type.SERVER_TO_CLIENT_START_GAME,
+        //   }));
+        //   break;
 
         case type.CLIENT_TO_SERVER_USE_CARD:
           const { card } = msg.payload;
           // where the card gets processed by the game logic
+
+          // check if the dungeon card's hp is 0
+            // Then generate a new dungeon card via the one in algos.js
 
         default:
           break;
