@@ -1,6 +1,6 @@
 // UI REDUCER ACTION TYPES
 export const SIGN_IN = "SIGN_IN";
-
+export const JOIN_ROOM = "JOIN_ROOM";
 
 // PLAYER REDUCER ACTION TYPES
 export const ADD_PLAYER = "ADD_PLAYER"; // Also used with Game State Reducer
