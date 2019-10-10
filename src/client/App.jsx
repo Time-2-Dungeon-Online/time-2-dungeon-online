@@ -1,3 +1,7 @@
+
+// import { Provider } from 'react-redux';
+// import { Component } from 'react';
+// import store from './store';
 import React, { useState } from 'react';
 
 const App = (props) => {
@@ -12,12 +16,14 @@ const App = (props) => {
     }
   };
   return (
-    <div>
-      <p>Heyyyy</p>
-      <button onClick={() => {
-        buttonClick();
-      }}>Send a WS message</button>
-    </div>
+    // <Provider store={store}>
+      <div>
+        <p>Heyyyy</p>
+        <button onClick={() => {
+          buttonClick();
+        }}>Send a WS message</button>
+      </div>
+    // </Provider>
   )
 }
 
