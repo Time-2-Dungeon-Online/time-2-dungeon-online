@@ -1,6 +1,10 @@
 import * as types from "./actionTypes";
 
 // PLAYER REDUCER ACTIONS
+export const signIn = () => ({
+  type: types.SIGN_IN,
+});
+
 export const addPlayer = (playerName) => ({
   type: types.ADD_PLAYER,
   payload: playerName,
