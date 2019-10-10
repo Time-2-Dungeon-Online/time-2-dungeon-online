@@ -32,6 +32,7 @@
     "css-loader": "^3.2.0",
     "express": "^4.17.1",
     "node": "^12.11.1",
+    "passport": "^0.4.0",
     "passport-facebook": "^3.0.0",
     "path": "^0.12.7",
     "pg": "^7.12.1",
