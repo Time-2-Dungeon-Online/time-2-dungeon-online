@@ -21,20 +21,8 @@ function Card(playerName, type, id) {
   this.owner = playerName;
 }
 
-// PlayerDeck Representation
-// function PlayerDeck(playerName) {
-//   this.numCardsInDeck = 40;
-//   this.owner = playerName;
-//   this.deck = makeShuffledDeck(playerName);
-// }
-
 // Enemy Representation
 function Enemy(howToKillObj, bossBool) {
-  // this.numRed = 0;
-  // this.numBlue = 0;
-  // this.numYellow = 0;
-  // this.numGreen = 0;
-  // this.numPurple = 0;
   this.defeatConditions = howToKillObj;
   this.location = 'DUNGEON_DECK';
   this.isBoss = bossBool || false;
@@ -44,6 +32,6 @@ function Enemy(howToKillObj, bossBool) {
 module.exports = {
   Player,
   Card,
-  PlayerDeck,
   Enemy,
+  // PlayerDeck,
 }
