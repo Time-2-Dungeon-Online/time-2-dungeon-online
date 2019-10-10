@@ -8,7 +8,10 @@ const initialState = {
 }
 
 const dungeonReducer = (state=initialState, action) => {
-
+  switch (action.type) {
+    default:
+      return state;
+  }
 }
 
 export default dungeonReducer;
