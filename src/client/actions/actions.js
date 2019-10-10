@@ -10,6 +10,9 @@ export const joinRoom = () => ({
 });
 
 // PLAYER REDUCER ACTIONS
+export const setRoomToUnavailable = () => ({
+  type: types.ROOM_UNAVAILABLE,
+})
 export const addPlayer = (playerName) => ({
   type: types.ADD_PLAYER,
   payload: playerName,

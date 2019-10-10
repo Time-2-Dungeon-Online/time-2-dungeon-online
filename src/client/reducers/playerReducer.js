@@ -4,20 +4,19 @@
 import * as types from "../actions/actionTypes";
 
 const initialState = {
-  playerCount: 0,
   allPlayers: {},
   cardsOnStage: [],
+  gameisFull: false,
 };
 
 const playerReducer = (state=initialState, action) => {
   let allPlayers;
   let cardsOnStage;
 
+  const newState = JSON.parse(JSON.stringify(state));
   switch(action.type) {
     case types.ADD_PLAYER:
-      console.log('Hahaha')
-      const newState = JSON.parse(JSON.stringify(state));
-      newState.playerCount = action.payload;
+      newState.allPlayers = action.payload;
       return newState;
       // allPlayers = {...(state.allPlayers)};
       // allPlayers[action.payload] = new Player(action.payload);
@@ -26,7 +25,9 @@ const playerReducer = (state=initialState, action) => {
       //   ...state,
       //   allPlayers,
       // };
-
+    case types.ROOM_UNAVAILABLE:
+      newState.gameisFull = true;
+      return newState;
     // case types.RANDOMIZE_PLAYER_DECKS:
     //   allPlayers = {...(state.allPlayers)};
     //   Object.keys(allPlayers).forEach((player) => {

@@ -21,12 +21,12 @@ function Card(playerName, type, id) {
   this.owner = playerName;
 }
 
-// Enemy Representation
-function Enemy(howToKillObj, bossBool) {
-  this.defeatConditions = howToKillObj;
-  this.location = 'DUNGEON_DECK';
-  this.isBoss = bossBool || false;
-}
+// // Enemy Representation
+// function Enemy(howToKillObj, bossBool) {
+//   this.defeatConditions = howToKillObj;
+//   this.location = 'DUNGEON_DECK';
+//   this.isBoss = bossBool || false;
+// }
 
 
 module.exports = {

@@ -3,6 +3,7 @@ export const SIGN_IN = "SIGN_IN";
 export const JOIN_ROOM = "JOIN_ROOM";
 
 // PLAYER REDUCER ACTION TYPES
+export const ROOM_UNAVAILABLE = "ROOM_UNAVAILABLE";
 export const ADD_PLAYER = "ADD_PLAYER"; // Also used with Game State Reducer
 export const RANDOMIZE_PLAYER_DECKS = "RANDOMIZE_PLAYER_DECKS";
 export const DRAW_NEW_HAND = "DRAW_NEW_HAND";
