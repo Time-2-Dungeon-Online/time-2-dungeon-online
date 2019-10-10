@@ -34,7 +34,7 @@ const randGen = (seed1, seed2, seed3, seed4) => {
   };
 };
 
-const seed = seedGen('gotem');
+let seed = seedGen('gotem');
 
 // Function that makes a shuffled deck
 const makeShuffledDeck = (playerName, diffSeed=null) => {
@@ -56,9 +56,8 @@ const makeShuffledDeck = (playerName, diffSeed=null) => {
   };
   
   let keys = Object.keys(numCardTypes);
-  if (diffSeed) {
-    let seed = seedGen(diffSeed);
-  }
+  if (diffSeed) { seed = seedGen(diffSeed); }
+
   while (keys.length) {
     let rand = randGen(seed(), seed(), seed(), seed());
     let idx = rand() % keys.length;
@@ -75,13 +74,28 @@ const makeShuffledDeck = (playerName, diffSeed=null) => {
 
 
 // Helper function that generates a new enemy or boss
-const generateRandomEnemy = (isBoss) => {
+const generateRandomEnemy = (isBoss, diffSeed=null) => {
   const types = [
     'RED', 'BLUE', 'YELLOW', 'GREEN', 'PURPLE',
   ]
 
   const defeatConditions = {};
-  
+  if (diffSeed) { seed = seedGen(diffSeed); }
+
+  let maxNumToKill = 4;
+  if (isBoss) maxNumToKill = 10;
+  let currentNumOfTypes = 0;
+
+  let rand = randGen(seed(), seed(), seed(), seed());
+  while (currentNumOfTypes < maxNumToKill) {
+    let randNum = rand() % 5;
+    if (!defeatConditions.hasOwnProperty(types[randNum])) { defeatConditions[types[randNum]] = 1; }
+    else { defeatConditions[types[randNum]]++; }
+    
+    currentNumOfTypes++;
+  }
+
+  return new Enemy(defeatConditions, isBoss);
 
 }
 
@@ -102,7 +116,13 @@ const isEnemyDead = (cardsOnStage, enemy) => {
     'INSTAKILL': 999,
   }
   const defeatConditions = enemy.defeatConditions;
-  cardsOnStage.forEach((card) => {
+
+  for (let i = 0; i < cardsOnStage.length; i++) {
+    let card = cardsOnStage[i];
+    if (card.cardType === 'INSTAKILL' && !enemy.isBoss) {
+      return true;
+    }
+
     let noX2;
     if (card.cardType.slice(-2) === 'x2') {
       noX2 = card.cardType.slice(0, card.cardType.length - 2);
@@ -110,25 +130,26 @@ const isEnemyDead = (cardsOnStage, enemy) => {
     if (defeatConditions.hasOwnProperty(noX2 || card.cardType)) {
       defeatConditions[noX2 || card.cardType] -= values[card.cardType];
     }
-  });
+  }
 
-  for (let condition in Object.keys(defeatConditions)) {
+  for (let condition of Object.keys(defeatConditions)) {
     if (defeatConditions[condition] > 0) return false;
   }
   return true;
 };
 
 // Function that makes a shuffled dungeon of size numCards
-const makeSuffledDungeon = (numCards, diffSeed=null) => {
+const makeShuffledDungeon = (numCards, diffSeed=null) => {
   const deck = [];
+  
+  if (diffSeed) { seed = seedGen(diffSeed); }
+  let rand = randGen(seed(), seed(), seed(), seed());
 
-  if (diffSeed) {
-    let seed = seedGen(diffSeed);
-  }
-
+  deck.push(generateRandomEnemy(true, rand().toString()));
+  
   while (numCards) {
-    let rand = randGen(seed(), seed(), seed(), seed());
-
+    rand = randGen(seed(), seed(), seed(), seed());
+    deck.push(generateRandomEnemy(false, rand().toString()));
     numCards--;
   }
 
@@ -136,7 +157,8 @@ const makeSuffledDungeon = (numCards, diffSeed=null) => {
 }
 
 
-
+// console.log(makeShuffledDungeon(20, 'asdgsdfg'));
+// console.log(isEnemyDead([new Card('','INSTAKILL', 1)], generateRandomEnemy(true)));
 // console.log(makeShuffledDeck('minot', 'cert')[0]);
 // console.log(makeShuffledDeck('hi', 'cert')[0]);
 // console.log(makeShuffledDeck('meeeee', 'cert')[0]);
@@ -147,4 +169,5 @@ const makeSuffledDungeon = (numCards, diffSeed=null) => {
 module.exports = {
   makeShuffledDeck,
   makeShuffledDungeon,
+  isEnemyDead,
 }
