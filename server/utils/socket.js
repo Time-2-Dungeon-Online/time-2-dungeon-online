@@ -30,7 +30,7 @@ module.exports = (port) => {
           // Check if the room is full after this new addition
           if (Object.keys(players).length === 5) state.isFull = true;
           // Send both the player list and number user is assigned to to clients
-          wss.clients.forEach(function each(client) {
+          wss.clients.forEach((client) => {
             if (client.readyState === WebSocket.OPEN) {
               client.send(JSON.stringify({
                 action: type.SERVER_TO_CLIENT_JOIN_GAME,
@@ -58,7 +58,19 @@ module.exports = (port) => {
 
           // check if the dungeon card's hp is 0
             // Then generate a new dungeon card via the one in algos.js
-
+          break;
+        // case type.CLIENT_TO_SERVER_QUIT_GAME:
+        //   const playerName = msg.payload;
+        //   delete players[playerName];
+        //   wss.clients.forEach((client) => {
+        //     if (client.readyState === WebSocket.OPEN) {
+        //       client.send(JSON.stringify({
+        //         action: type.SERVER_TO_CLIENT_JOIN_GAME,
+        //         payload: players,
+        //       }));
+        //     }
+        //   });          
+        //   break;
         default:
           break;
       }
