@@ -98,6 +98,32 @@ const isEnemyDead = (cardsOnStage, enemy) => {
   return true;
 };
 
+const attackEnemy = (card, enemy) => {
+  const { cardType } = card;
+
+  const values = {
+    'RED': 1, 'REDx2': 2,
+    'BLUE': 1, 'BLUEx2': 2,
+    'YELLOW': 1, 'YELLOWx2': 2,
+    'GREEN': 1, 'GREENx2': 2,
+    'PURPLE': 1, 'PURPLEx2': 2,
+    'INSTAKILL': 999,
+  }
+
+  if (cardType === 'INSTAKILL' && !enemy.isBoss) {
+    enemy.alive = false;
+  }
+  let noX2;
+  if (cardType.slice(-2) === 'x2') {
+    noX2 = cardType.slice(0, cardType.length - 2);
+  }
+
+  if (enemy.defeatConditions.hasOwnProperty(noX2 || cardType)) {
+    enemy.defeatConditions[noX2 || cardType] -= values[cardType];
+  }
+
+}
+
 // Function that makes a shuffled dungeon of size numCards
 const makeShuffledDungeon = (numCards, diffSeed=null) => {
   const deck = [];
