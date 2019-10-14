@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { send } from '@giantmachines/redux-websocket';
+import { useSelector, useDispatch } from 'react-redux';
 import PlayerContainer from './PlayerContainer.jsx';
 import DungeonContainer from './DungeonContainer.jsx';
+import ClientPlayer from '../components/ClientPlayer.jsx';
+import { startGame } from '../actions/actions'
 
 const GameContainer = () => {
   // const currentUser = useSelector(state => state.uiReducer.userID);
@@ -14,8 +17,8 @@ const GameContainer = () => {
   //     }))
   //   })
   // })
-  const allPlayers = useSelector(state => state.PlayerReducer.allPlayers);
-  console.log(allPlayers);
+  const { allPlayers, gameStarted } = useSelector(state => state.gameStateReducer);
+  const dispatch = useDispatch();
   const players = [];
   Object.keys(allPlayers).forEach((player) => {
     console.log(allPlayers[player]);
@@ -23,10 +26,16 @@ const GameContainer = () => {
     players.push(<PlayerContainer name={playerName} cardCount={cardCount} />);
   })
 
+  const startGameButtonClick = () => {
+    dispatch(send(startGame()));
+  }
+
   return (
     <div id="game-container">
-      <DungeonContainer />
       {players}
+      {gameStarted ? <><DungeonContainer /> <ClientPlayer /></> : <button onClick={() => {
+        startGameButtonClick();
+      }}>Start Game</button>}
     </div>
   )
 }

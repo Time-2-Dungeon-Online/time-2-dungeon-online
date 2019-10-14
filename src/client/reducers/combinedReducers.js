@@ -1,16 +1,16 @@
 
 import { combineReducers } from 'redux';
 
-import PlayerReducer from './playerReducer';
-import DungeonReducer from './dungeonReducer';
-// import GameStateReducer from './gameStateReducer';
+import gameStateReducer from './gameStateReducer';
+import dungeonReducer from './dungeonReducer';
+import playerReducer from './playerReducer';
 import uiReducer from './uiReducer';
 
 const reducers = combineReducers({
-  PlayerReducer,
-  DungeonReducer,
+  gameStateReducer,
+  dungeonReducer,
   uiReducer,
-  // GameStateReducer,
+  playerReducer,
 });
 
 export default reducers;

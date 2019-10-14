@@ -142,9 +142,10 @@ const makeShuffledDungeon = (numCards, diffSeed=null) => {
   return deck;
 }
 
-console.log(makeShuffledDungeon(20, 'asdgsdfg'));
+// console.log(makeShuffledDungeon(20, 'asdgsdfg'));
 
 module.exports = {
   makeShuffledDungeon,
   isEnemyDead,
+  attackEnemy,
 }
