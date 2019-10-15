@@ -48,9 +48,9 @@
     "ws": "^7.1.2"
   },
   "devDependencies": {
-    "nodemon": "^1.19.3",
-    "webpack-cli": "^3.3.9",
     "jest": "^24.9.0",
-    "supertest": "^4.0.2"
+    "nodemon": "^1.19.3",
+    "supertest": "^4.0.2",
+    "webpack-cli": "^3.3.9"
   }
 }
