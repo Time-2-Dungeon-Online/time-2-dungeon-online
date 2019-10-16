@@ -122,6 +122,13 @@ const attackEnemy = (card, enemy) => {
     enemy.defeatConditions[noX2 || cardType] -= values[cardType];
   }
 
+  let checkIfDead = 0;
+  for (let condition of Object.keys(enemy.defeatConditions)) {
+    if (!enemy.defeatConditions[condition]) checkIfDead++;
+  }
+
+  if (checkIfDead === Object.keys(enemy.defeatConditions).length) enemy.alive = false;
+
 }
 
 // Function that makes a shuffled dungeon of size numCards
