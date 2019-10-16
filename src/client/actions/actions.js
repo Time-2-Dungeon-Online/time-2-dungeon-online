@@ -1,4 +1,5 @@
 import * as types from "./actionTypes";
+import * as socketTypes from '../../../server/utils/actions';
 
 
 // UI REDUCER ACTIONS
@@ -23,9 +24,8 @@ export const randomizePlayerDecks = () => ({
 export const drawNewHand = () => ({
   type: types.DRAW_NEW_HAND,
 });
-export const drawCard = (playerName) => ({
+export const drawCard = () => ({
   type: types.DRAW_CARD,
-  payload: playerName,
 });
 export const useCard = (card) => ({
   type: types.USE_CARD,
@@ -65,7 +65,7 @@ export const winOrLoss = (winLoseBool) => ({
   payload: winLoseBool,
 });
 export const startGame = () => ({
-  type: types.START_GAME,
+  type: socketTypes.CLIENT_TO_SERVER_START_GAME,
 });
 export const finishGame = () => ({
   type: types.FINISH_GAME,

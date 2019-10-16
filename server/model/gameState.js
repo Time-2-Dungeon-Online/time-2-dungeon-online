@@ -3,6 +3,7 @@ module.exports = {
   isFull: false,
   players: {},
   playerCount: 0,
-  dungeonCardHP: 50,
-  dungeonCard: null,
+  dungeonDeck: [],
+  dungeonCardCount: 20,
+  currentEnemy: null,
 }

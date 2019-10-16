@@ -1,10 +1,11 @@
 import React from 'react';
 
 const Player = (props) => {
+  const { name, cardCount } = props;
   return (
     <div id="player">
-      Player {props.playerName}
-      HP: 40/40
+      <p>Player {name}</p>
+      <p>HP: {cardCount}/40</p>
     </div>
   )
 }

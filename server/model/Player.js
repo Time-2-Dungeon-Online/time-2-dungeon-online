@@ -12,7 +12,4 @@ module.exports = class Player {
     if (instruction === 'increase') this.hp += amount;
     if (this.hp < 0) this.hp = 0;
   }
-
-  
-
 }
