@@ -4,7 +4,7 @@ const https = require('https');
 const app = express();
 
 const socket = require('./utils/socket');
-const db = require('./model/SQLConnection')
+const db = require('./model/sql')
 const path = require('path');
 const fs = require('fs');
 
@@ -16,6 +16,7 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(passport.initialize());
+app.use(passport.session());
 
 // Establish the WebSocket server
 socket(8000);

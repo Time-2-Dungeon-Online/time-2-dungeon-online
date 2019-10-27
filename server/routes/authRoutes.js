@@ -12,9 +12,12 @@ passport.use(new FacebookStrategy({
   callbackURL: 'http://localhost:8080/auth/callback',
 }, (accessToken, refreshToken, profile, cb) => {
   console.log('accessToken', accessToken);
-  console.log('profile', profile);
-  return cb('hey');
+  return cb(null, profile);
 }));
+
+passport.serializeUser(function(profile, done) {
+  return done(null, profile.id);
+});
 
 router.get('/', passport.authenticate('facebook'));
 
