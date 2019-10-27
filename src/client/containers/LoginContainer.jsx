@@ -12,9 +12,7 @@ const LoginContainer = () => {
       <div id="title">
         <h1>Time 2 Dungeon</h1>
       </div>
-      <button onClick={() => {
-        signInUponClick();
-      }}>Log In</button>
+      <a href="auth"><button>Login with Facebook</button></a>
     </div>
   )
 }

@@ -1,28 +1,37 @@
 const express = require('express');
+const https = require('https');
 
 const app = express();
 
 const socket = require('./utils/socket');
 const db = require('./model/SQLConnection')
 const path = require('path');
+const fs = require('fs');
+
+const passport = require('passport');
+
+const authRoutes = require('./routes/authRoutes');
 
 const PORT = 3000;
 
-serverVisualizer.start(app)();
-
 app.use(express.json());
+app.use(passport.initialize());
 
 // Establish the WebSocket server
 socket(8000);
 // console.log(socket);
 
-//only serve static files if we are in production
+// only serve static files if we are in production
 if(process.env.NODE_ENV === 'production') {
-  app.use('/', express.static(path.resolve(__dirname, '../')));
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../index.html'));
+  });
   //serve bundle from the dist folder
   app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
 };
 
+// Routes
+app.use('/auth', authRoutes);
 
 // // global error handler
 // app.use('*', (err, req, res) => {
@@ -30,5 +39,11 @@ if(process.env.NODE_ENV === 'production') {
 // });
 
 app.listen(3000, () => console.log('listening on PORT: ' + PORT));
+
+// const server = https.createServer({
+//   key: fs.readFileSync(path.resolve(__dirname, './key.pem')),
+//   cert: fs.readFileSync(path.resolve(__dirname, './cert.pem')),
+//   passphrase: 'dungeon',
+// }, app).listen(3000);
 
 module.exports = app;

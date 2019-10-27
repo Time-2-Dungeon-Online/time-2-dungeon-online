@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 
 module.exports = {
     mode: process.env.NODE_ENV,
@@ -11,8 +12,13 @@ module.exports = {
         publicPath: '/dist/',
         port: 8080,
         proxy: {
-            '/api': 'http://localhost:3000',
-        }
+            '/auth': 'http://localhost:3000',
+        },
+        // https: {
+        //   key: fs.readFileSync(path.resolve(__dirname, './server/key.pem')),
+        //   cert: fs.readFileSync(path.resolve(__dirname, './server/cert.pem')),
+        //   passphrase: 'dungeon',
+        // }
     },
     module: {
     rules: [
