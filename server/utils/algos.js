@@ -129,6 +129,7 @@ const attackEnemy = (card, enemy) => {
 
   if (checkIfDead === Object.keys(enemy.defeatConditions).length) enemy.alive = false;
 
+  return enemy;
 }
 
 // Function that makes a shuffled dungeon of size numCards
