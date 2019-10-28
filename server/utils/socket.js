@@ -69,7 +69,7 @@ module.exports = (port) => {
           // Drop one card from that player
           players[playerName].updateCardCount(1, 'decrease');
           // Process the given card on the current enemy
-          attackEnemy(card, state.currentEnemy);
+          state.currentEnemy = attackEnemy(card, state.currentEnemy);
           // check if the dungeon card's defeated
           if (!state.currentEnemy.alive) {
             // check if deck.length = 0
@@ -81,7 +81,7 @@ module.exports = (port) => {
           wss.clients.forEach((client) => {
             if (client.readyState === WebSocket.OPEN) {
               client.send(JSON.stringify({
-                action: type.SERVER_TO_CLIENT_UPDATE_ENEMY_PLAYER,
+                action: type.SERVER_TO_CLIENT_USE_CARD,
                 payload: {
                   currentEnemy: state.currentEnemy,
                   players,

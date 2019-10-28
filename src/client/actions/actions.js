@@ -27,10 +27,14 @@ export const drawNewHand = () => ({
 export const drawCard = () => ({
   type: types.DRAW_CARD,
 });
-export const useCard = (card) => ({
-  type: types.USE_CARD,
-  payload: card
+export const useCardS2C = (card, playerName) => ({
+  type: socketTypes.SERVER_TO_CLIENT_USE_CARD,
+  payload: { card, playerName }
 });
+export const useCardC2S = (card, playerName) => ({
+  type: socketTypes.CLIENT_TO_SERVER_USE_CARD,
+  payload: { card, playerName },
+})
 export const discardCard = (card) => ({
   type: types.DISCARD_CARD,
   payload: card

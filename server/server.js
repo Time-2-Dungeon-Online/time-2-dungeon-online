@@ -8,8 +8,6 @@ const path = require('path');
 
 const PORT = 3000;
 
-serverVisualizer.start(app)();
-
 app.use(express.json());
 
 // Establish the WebSocket server

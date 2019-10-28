@@ -13,8 +13,8 @@ const { makeShuffledDeck } = require('./game_algos');
 // }
 
 // Card Representation
-function Card(playerName, type, id) {
-  this.id = id;
+function Card(playerName, type, key) {
+  this.key = key;
   this.cardType = type;
   this.highlighted = false;
   this.location = 'PLAYER_DECK';
